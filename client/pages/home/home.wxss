@@ -1,1 +1,17 @@
 /* pages/home/home.wxss */
+.shop-bg {
+  width: 750rpx;
+  height: 204rpx;
+  top: 0;
+  position: relative;
+}
+
+.shop-card {
+  width: 630rpx;
+  height: 300rpx;
+  position: absolute;
+  top: 100rpx;
+  background-color: #fff;
+  border-radius: 15rpx;
+  margin-left: 60rpx;
+}

@@ -1,2 +1,10 @@
 <!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+
+<view class='bg'>
+  <view>
+    <image class='shop-bg' src='../../images/bg.png'></image>
+  </view>
+  <view class='shop-card'>
+    
+  </view>
+</view>
