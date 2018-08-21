@@ -5,7 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    // userInfo: null,
+    userInfo: {
+      nickname: '优达学城',
+      avatarUrl: ''
+    }
   },
 
   /**
