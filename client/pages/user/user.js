@@ -1,15 +1,13 @@
 // pages/user/user.js
+const qcloud = require('../../vendor/wafer2-client-sdk/index.js')
+const config = require('../../config.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    // userInfo: null,
-    userInfo: {
-      nickname: '优达学城',
-      avatarUrl: ''
-    }
+    userInfo: null,
   },
 
   onTapAddress () {
@@ -30,14 +28,63 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
+  },
+
+  onTapLogin: function () {
+    this.doQcloudLogin({
+      success: ({userInfo}) => {
+        this.setData({
+          userInfo
+        })
+      }
+    })
+  },
+
+  getUserInfo ({success, error}) {
+    qcloud.request({
+      url: config.service.requestUrl,
+      login: true,
+      success: result => {
+        let data = result.data
+        if (!data.code) {
+          let userInfo = data.data
+          success && success({
+            userInfo
+          })
+        } else {
+          error && error()
+        }
+      },
+      fail: () => {
+        error && error()
+      }
+    })
+  },
+
+  doQcloudLogin({success, error}){
+    qcloud.login({
+      success: result => {
+        if (result) {
+          let userInfo = result
+          success && success({
+            userInfo
+          })
+        } else {
+          this.getUserInfo({success, error})
+        }
+      },
+      fail: () => {
+        error && error()
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
