@@ -84,7 +84,25 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    this.checkSession({
+      success: ({userInfo}) => {
+        this.setData({
+          userInfo: userInfo
+        })
+      },
+      error: () => {}
+    })
+  },
 
+  checkSession ({success, error}) {
+    wx.checkSession({
+      success: () => {
+        this.getUserInfo({success, error})
+      },
+      fail: () => {
+        error && error()
+      }
+    })
   },
 
   /**
